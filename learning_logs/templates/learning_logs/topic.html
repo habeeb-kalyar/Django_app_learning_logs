@@ -1,0 +1,30 @@
+{% extends "learning_logs/base.html" %}
+
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h3>Topic: <span class="text-primary">{{ topic }}</span></h3>
+    <a href="{% url 'learning_logs:new_entry' topic.id %}" class="btn btn-primary">
+      + Add new entry
+    </a>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      {% for entry in entries %}
+        <div class="card mb-3 shadow-sm border-0">
+          <div class="card-header bg-light d-flex justify-content-between align-items-center">
+            <span class="fw-bold text-muted">{{ entry.date_added|date:'M d, Y H:i' }}</span>
+            <a href="{% url 'learning_logs:edit_entry' entry.id %}" class="btn btn-sm btn-outline-secondary">Edit</a>
+          </div>
+          <div class="card-body">
+            <p class="card-text">{{ entry.text|linebreaks }}</p>
+          </div>
+        </div>
+      {% empty %}
+        <div class="alert alert-info text-center">
+          There are no entries for this topic yet. Start by adding one above!
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock content %}

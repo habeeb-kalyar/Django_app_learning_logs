@@ -1,0 +1,33 @@
+{% extends "learning_logs/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-md-8"> <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+          
+          <h3 class="card-title mb-4 border-bottom pb-2">Add a New Topic</h3>
+
+          <form action="{% url 'learning_logs:new_topic' %}" method='post'>
+            {% csrf_token %}
+            
+            {{ form|crispy }}
+            
+            <div class="mt-4">
+              <button name="submit" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Add Topic
+              </button>
+              
+              <a href="{% url 'learning_logs:topics' %}" class="btn btn-outline-secondary ms-2">
+                Cancel
+              </a>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+{% endblock content %}
